@@ -1,0 +1,3 @@
+module ValidatesCsvFormatOf
+  VERSION = "0.0.1"
+end

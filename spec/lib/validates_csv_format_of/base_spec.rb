@@ -4,9 +4,8 @@ describe ValidatesCsvFormatOf::Base do
   include ValidatesCsvFormatOf::Base
 
   describe "#validate_csv_format" do
-    let(:file) { 'spec/fixtures/utf8.csv' }
-
     context "valid format with known options" do
+      let(:file) { 'spec/fixtures/utf8.csv' }
       let(:options) { {encoding: "UTF-8:UTF-8"} }
 
       before do
@@ -17,13 +16,8 @@ describe ValidatesCsvFormatOf::Base do
     end
 
     context "invalid format with known options" do
-      let(:options) { {encoding: "CP932:UTF-8"} }
-
-      before do
-        expect(CSV).to receive(:open).with(file, 'r', options)
-      end
-
-      it { validate_csv_format(file, options) }
+      let(:file) { 'spec/fixtures/100x100.gif' }
+      it { expect(validate_csv_format(file)).to be_false }
     end
 
     context "unknown options" do
